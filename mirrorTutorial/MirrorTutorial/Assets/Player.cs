@@ -20,8 +20,18 @@ public class Player : NetworkBehaviour
         {
             return;
         }
-
-        transform.Translate(_movement);
+        CmdMove();
     }
 
+    [Command]
+    private void CmdMove()
+    {
+        RpcMove();
+    }
+
+    [ClientRpc]
+    private void RpcMove()
+    {
+        transform.Translate(_movement);
+    }
 }
