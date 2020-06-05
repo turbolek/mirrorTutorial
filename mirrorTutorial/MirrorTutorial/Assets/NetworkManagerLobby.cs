@@ -54,8 +54,8 @@ public class NetworkManagerLobby : NetworkManager
         Scene menuScene = SceneManager.GetSceneByName(_menuSceneName);
         if (menuScene != null && menuScene.isLoaded)
         {
-            GameObject roomPlayer = Instantiate(_roomPlayerPrefab);
-            NetworkServer.AddPlayerForConnection(conn, roomPlayer);
+            NetworkRoomPlayer roomPlayer = Instantiate(_roomPlayerPrefab);
+            NetworkServer.AddPlayerForConnection(conn, roomPlayer.gameObject);
         }
     }
 }
