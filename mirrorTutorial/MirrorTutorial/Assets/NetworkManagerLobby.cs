@@ -9,14 +9,21 @@ public class NetworkManagerLobby : NetworkManager
 {
     [Scene]
     [SerializeField]
+    private string _menuScenePath;
     private string _menuSceneName;
 
     [Header("Room")]
     [SerializeField]
-    private NetworkRoomPlayer _roomPlayerPrefab;
+    private NetworkRoomPlayerLobby _roomPlayerPrefab;
 
     public static event Action ClientConnected;
     public static event Action ClientDisconnected;
+
+    public override void Start()
+    {
+        base.Start();
+        _menuSceneName = StripSceneName(_menuScenePath);
+    }
 
     public override void OnClientConnect(NetworkConnection conn)
     {
@@ -54,8 +61,17 @@ public class NetworkManagerLobby : NetworkManager
         Scene menuScene = SceneManager.GetSceneByName(_menuSceneName);
         if (menuScene != null && menuScene.isLoaded)
         {
-            NetworkRoomPlayer roomPlayer = Instantiate(_roomPlayerPrefab);
-            NetworkServer.AddPlayerForConnection(conn, roomPlayer.gameObject);
+            GameObject roomPlayer = Instantiate(_roomPlayerPrefab.gameObject);
+            NetworkServer.AddPlayerForConnection(conn, roomPlayer);
         }
     }
+
+    private string StripSceneName(string scenePath)
+    {
+        string[] pathParts = scenePath.Split('/');
+        string fileName = pathParts[pathParts.Length - 1]; //get last part of the path
+        fileName = fileName.Split('.')[0]; // remove extension
+        return fileName;
+    }
+
 }

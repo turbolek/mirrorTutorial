@@ -12,6 +12,8 @@ public class PlayerNamePanel : MonoBehaviour
     private Button _continueButton;
     [SerializeField]
     private Button _saveNameButton;
+    [SerializeField]
+    private GameObject _landingPagePanel;
 
     public static string DisplayName { get; private set; }
 
@@ -21,6 +23,8 @@ public class PlayerNamePanel : MonoBehaviour
     {
         SetContinueButtonState(false);
         SetupInputField();
+
+        _saveNameButton.onClick.AddListener(OnSaveNameButtonClicked);
     }
 
     private void SetupInputField()
@@ -49,6 +53,11 @@ public class PlayerNamePanel : MonoBehaviour
         _continueButton.interactable = enabled;
     }
 
-
+    private void OnSaveNameButtonClicked()
+    {
+        SavePlayerName(_nameInput.text);
+        _landingPagePanel.gameObject.SetActive(true);
+        gameObject.SetActive(false);
+    }
 
 }
