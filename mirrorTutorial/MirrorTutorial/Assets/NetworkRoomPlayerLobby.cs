@@ -117,8 +117,14 @@ public class NetworkRoomPlayerLobby : NetworkBehaviour
         _startGameButton.interactable = readyToStart;
     }
 
-    public void HandleReadyStatusChanged(bool oldValue, bool newValue) => UpdateDisplay();
-    public void HandleDisplayNameChanged(string oldValue, string newValue) => UpdateDisplay();
+    public void HandleReadyStatusChanged(bool oldValue, bool newValue)
+    {
+        UpdateDisplay();
+    }
+    public void HandleDisplayNameChanged(string oldValue, string newValue)
+    {
+        UpdateDisplay();
+    }
 
     [Command]
     private void CmdSetDisplayName(string displayName)

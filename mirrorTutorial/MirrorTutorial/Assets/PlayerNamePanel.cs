@@ -44,6 +44,7 @@ public class PlayerNamePanel : MonoBehaviour
             return;
         }
 
+        DisplayName = name;
         PlayerPrefs.SetString(PLAYER_NAME_KEY, name);
         SetContinueButtonState(true);
     }
