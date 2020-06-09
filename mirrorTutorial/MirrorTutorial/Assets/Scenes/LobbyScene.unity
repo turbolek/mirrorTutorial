@@ -728,7 +728,7 @@ Camera:
   m_GameObject: {fileID: 300218497}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -1343,11 +1343,13 @@ MonoBehaviour:
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 8295421845308599213, guid: fad319bac658c9e4f850fe8aff696afa,
+  playerPrefab: {fileID: 378608464546412013, guid: e56cb4ef5b4f10c42a24f76287a45568,
     type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 8295421845308599213, guid: fad319bac658c9e4f850fe8aff696afa, type: 3}
+  _minPlayers: 0
   _menuScenePath: Assets/Scenes/LobbyScene.unity
   _roomPlayerPrefab: {fileID: 8295421845308599212, guid: fad319bac658c9e4f850fe8aff696afa,
     type: 3}
