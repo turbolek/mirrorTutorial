@@ -18,11 +18,16 @@ public class NetworkManagerLobby : NetworkManager
     [Header("Room")]
     [SerializeField]
     private NetworkRoomPlayerLobby _roomPlayerPrefab;
+
+    [Header("Game")]
     [SerializeField]
     private NetworkGamePlayerLobby _gamePlayerPrefab;
+    [SerializeField]
+    private GameObject _spawnSystemPrefab;
 
     public static event Action ClientConnected;
     public static event Action ClientDisconnected;
+    public static event Action<NetworkConnection> OnServerReadied;
 
     public List<NetworkRoomPlayerLobby> RoomPlayers { get; } = new List<NetworkRoomPlayerLobby>();
     public List<NetworkGamePlayerLobby> GamePlayers { get; } = new List<NetworkGamePlayerLobby>();
@@ -158,5 +163,20 @@ public class NetworkManagerLobby : NetworkManager
         }
 
         base.ServerChangeScene(newSceneName);
+    }
+
+    public override void OnServerReady(NetworkConnection conn)
+    {
+        base.OnServerReady(conn);
+        OnServerReadied?.Invoke(conn);
+    }
+
+    public override void OnServerSceneChanged(string sceneName)
+    {
+        if (sceneName.StartsWith("Scene_Map"))
+        {
+            GameObject spawnSystemInstance = Instantiate(_spawnSystemPrefab);
+            NetworkServer.Spawn(spawnSystemInstance);
+        }
     }
 }
